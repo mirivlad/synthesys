@@ -30,11 +30,12 @@ enum hess_field_offset {
   HESS_OFF_TRANSFER_ID=14
 };
 static inline uint16_t hess_crc16_ccitt_false(const uint8_t *d, unsigned n) {
-  uint16_t crc = 0xFFFFu;
-  for (unsigned i=0; i<n; ++i) {
-    crc ^= (uint16_t)d[i] << 8;
-    for (unsigned b=0; b<8; ++b) crc = (uint16_t)((crc & 0x8000u)?(crc<<1)^0x1021u:(crc<<1));
+  uint32_t crc = 0xFFFFu;
+  for (unsigned i = 0; i < n; ++i) {
+    crc ^= (uint32_t)d[i] << 8;
+    for (unsigned b = 0; b < 8; ++b)
+      crc = ((crc << 1) ^ ((crc & 0x8000u) ? 0x1021u : 0u)) & 0xFFFFu;
   }
-  return crc;
+  return (uint16_t)crc;
 }
 #endif
