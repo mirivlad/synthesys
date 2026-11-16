@@ -1,0 +1,8 @@
+# Firmware build outputs (future)
+build/
+sdkconfig.old
+*.elf
+*.bin
+*.map
+__pycache__/
+.DS_Store

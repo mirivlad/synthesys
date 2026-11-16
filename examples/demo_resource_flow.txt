@@ -1,0 +1,10 @@
+Example only: CPU -> Video -> Storage -> Video
+1. CPU: VFS open /games/demo/sprites.bin and map extents.
+2. CPU: Video ALLOC_RESOURCE(size, type) -> handle
+3. CPU: Storage PREPARE_EXTENTS(transfer_id, list)
+4. CPU: Video PREPARE_RECEIVE(transfer_id, handle)
+5. CPU: select OWNER(Video), TARGET(Storage), hardware GRANT.
+6. Video SPI master clocks READ(transfer_id) from Storage SPI slave.
+7. Video releases external drivers; ATTN_N.
+8. CPU reclaims bus, polls Video+Storage, confirms CRC and READY.
+9. CPU: Video DRAW_SPRITE(handle, x, y)
