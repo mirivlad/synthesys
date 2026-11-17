@@ -27,6 +27,7 @@
 
 - [HESS-40: все 40 контактов](docs/hardware/04-hess-40pin-connector.md)
 - [CPU P0: соединения с HESS, USB, питание и схема](docs/hardware/05-cpu-module-p0.md)
+- [Физическое расположение выводов DevKitC-1 и ножек буфера DIP-14](docs/hardware/07-devkitc1-dip14-wiring.md)
 - [Пошаговая загрузка ОС и модулей P0–P5](docs/hardware/06-boot-stages.md)
 - [Первая прошивка монитора CPU](firmware/cpu-monitor/README.md)
 
