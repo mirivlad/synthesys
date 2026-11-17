@@ -49,3 +49,9 @@ firmware/
 ```
 
 Здесь описана **планируемая структура**, не притворяйтесь, что исходники уже готовы.
+
+## Пять одновременно активных модулей
+
+До отметки FULL PASS системный scheduler должен обслуживать CPU, Storage, Video, Sound и Input одновременно, вести счётчики HESS requests/owner, CRC errors, Input FIFO overflow/seq, Video frame latency/drop, Sound underrun и device resets. Не выполнять `spi_slave_transmit()` с предположением, что peer всегда готов: применять заранее queued DMA transaction и ready-handshake по официальному драйверу Espressif.
+
+CPU должен **пакетировать команды одного видеокадра**, ввод должен читаться пачками, peer grants — быть ограниченными по времени. Логика приложения может синхронно ждать ресурс до старта игрового процесса, но игровая демонстрация с фоновой загрузкой обязана регулярно возвращать bus CPU. [Критерии](../acceptance-five-modules.md).

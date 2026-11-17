@@ -43,3 +43,19 @@ CPU следит за тайм-аутом и ATTN_N вне зависимост�
 ## F. Fallback двух плат
 
 CPU ↔ Storage без bus mastering: CPU мастер, Storage slave. Для теста чтения FAT32 достаточно стандартного SPI, фреймов и CRC. Это единственное на M1 допущение передачи raw-блоков через CPU; для нормальной прямой загрузки требуется M3.
+
+## F. Полная работа пяти модулей
+
+```text
+CPU:   game loop 50 Hz; command buffer → Video; music events → Sound
+Video: independent scanout + renderer using local PSRAM; no stream of frames from CPU
+Sound: independent mixer/I2S using local buffers
+Input: keyboard PS/2 OR USB host → timestamped event FIFO → ATTN_N
+Storage: direct read of new tiles/sounds only after CPU prepares extents
+HESS: CPU gives Video/Storage or Sound/Storage short grants, then reclaims
+      bus to poll Input and issue frame/sound commands
+```
+
+A single seconds-long transfer grant is **not compatible** with low-latency Input/CPU commands. The baseline requires bounded chunks and fair service windows. [Acceptance profile](acceptance-five-modules.md).
+
+Исторический Fallback тест из двух плат описан ниже как этап bring-up, не как полный ПК.
