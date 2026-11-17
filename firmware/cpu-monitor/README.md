@@ -5,7 +5,7 @@
 ## Назначение
 
 - Двусторонний USB Serial/JTAG терминал с ПК, help/version/status/mem/uptime.
-- Простая очередь **виртуальных** клавиш, пересылаемых из USB-терминала командами `key up`, `key down left`, `key up left`, `input`. Это не USB HID-устройство и не полноценная Input-плата.
+- Простая очередь **виртуальных** клавиш, пересылаемых из USB-терминала командами `key tap up`, `key down left`, `key up left`, `input`. Это не USB HID-устройство и не полноценная Input-плата.
 - HESS **преднамеренно выключена**: GPIO13 BUS_ENABLE = 0, CLK/D0/XFER переведены в input. На backplane также обязателен **аппаратный pulldown BUS_ENABLE**, даже когда ESP32 перезагружается. `hess`, `modules`, `boot` честно сообщают, что транспорт и загрузчик не реализованы.
 - Текстовый монитор для rescue/bring-up, позже — загрузка из Storage.
 

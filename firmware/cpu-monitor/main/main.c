@@ -96,6 +96,7 @@ static void show_help(void)
         "  modules              discovery not available yet\r\n"
         "  boot                 Storage OS loader not available yet\r\n"
         "  key <name>           emulate a short press from host keyboard\r\n"
+        "  key tap <name>      tap a key (including arrow up/down)\r\n"
         "  key down|up <name>   emulate a key transition\r\n"
         "  input                list & drain virtual input event queue\r\n"
         "  echo <text>          echo text for transport test\r\n"
@@ -197,9 +198,18 @@ static void handle_command(char *line)
                 usb_send("ERR: missing key name\r\n");
             }
         } else {
-            key_push("press", first);
-            key_push("release", first);
-            usb_send("OK: virtual key tap queued\r\n");
+            char *name = first;
+            if (!strcmp(first, "tap")) name = strtok_r(NULL, " \t", &saveptr);
+            if (!name || !*name) {
+                usb_send("ERR: missing key name\r\n");
+            } else if (key_count + 2 > KEY_QUEUE_SIZE) {
+                key_overflows++;
+                usb_send("ERR: virtual input queue full (cannot tap)\r\n");
+            } else {
+                key_push("press", name);
+                key_push("release", name);
+                usb_send("OK: virtual key tap queued\r\n");
+            }
         }
     } else if (!strcmp(command, "echo")) {
         const char *rest = saveptr ? saveptr : "";
