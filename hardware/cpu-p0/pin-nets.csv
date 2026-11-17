@@ -1,0 +1,25 @@
+Component,Net,Connects to,Status
+U1.GPIO4,CLK,U2 master buffer IN,P0 pin draft
+U1.GPIO5,D0,U2 master buffer IN,P0 pin draft
+U1.GPIO6,D1,J1.13 input,P0 pin draft
+U1.GPIO7,D2,J1.15 NC until QPI,RESERVE
+U1.GPIO8,D3,J1.17 NC until QPI,RESERVE
+U1.GPIO9,XFER_OUT_N,U2 master buffer IN,P0 pin draft
+U2.OUT_CLK,HESS_CLK,J1.9,buffer OE hardware gated
+U2.OUT_D0,HESS_D0,J1.11,buffer OE hardware gated
+U2.OUT_XFER,HESS_XFER_OUT_N,J1.19,buffer OE hardware gated
+U1.GPIO10,CTRL_SER,J1.37,CPU only
+U1.GPIO11,CTRL_SCK,J1.38,CPU only
+U1.GPIO12,CTRL_LATCH,J1.39,CPU only
+U1.GPIO13,BUS_ENABLE,J1.40,10k pulldown backplane
+U1.GPIO14,ATTN_N,J1.25,input only backplane pullup
+U1.GPIO15,SYS_RST_N,J1.27,optional via open drain transistor
+U1.GPIO16,SLOT_CS_N,J1.21,optional CPU target slave
+U1.GPIO17,SLOT_GRANT_N,J1.23,optional grant sense and external hardware gate
+U1.GPIO19,USB_D-,Local USB connector on devkit,do not route via HESS
+U1.GPIO20,USB_D+,Local USB connector on devkit,do not route via HESS
+J1.1/+J1.2/+J1.5/+J1.6,HESS_5V,JP_PWR to Devkit VIN,JP OPEN for PC USB power
+J1.3/+J1.4/+J1.7/+J1.8,GND,GND of CPU and backplane,GND plus other grounds 10 12 14 ...
+U1.GPIO43,UART0_TX,optional local debug header,3.3V UART
+U1.GPIO44,UART0_RX,optional local debug header,3.3V UART
+U2./OE,CPU_GRANT_HW,decoded CPU owner plus bus enable,actual logic schematic TBD
