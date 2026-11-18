@@ -1,10 +1,10 @@
-# CPU P0 UART0 recovery monitor — с питанием через HESS
+# CPU P0 UART0 recovery monitor — запасной вариант с питанием через HESS
 
 **Исходники подготовлены, но аппаратно не тестировались и в текущей среде ESP-IDF не установлен.**
 
 БП +5 В → backplane → HESS-40 (+5 В contacts 1/2/5/6) → защита F2 → ESP32-S3 DevKitC-1 **U1.J1.21 5V**. U1.J1.22 — общая GND. Буфер U2=74HC125D всегда в Hi-Z на P0, CPU GPIO13 BUS_ENABLE LOW.
 
-Для терминала/прошивки ПК нужен **отдельный USB–UART TTL с выходами 3,3 В**, не соединять +5 V и 3V3 адаптера с CPU:
+**Обычно дополнительный адаптер не нужен:** основной интерфейс — native USB Serial/JTAG, схема [питания и развязки VBUS](../../docs/hardware/09-backplane-powered-p0.md). Этот вариант UART0 оставлен для плат с неизвестной USB-развязкой, низкоуровневой диагностики или проблем USB enumeration. Если используется отдельный USB–UART TTL, он должен иметь уровни 3,3 В; не соединять +5 V и 3V3 адаптера с CPU:
 
 | CPU ESP32-S3 DevKitC-1 | USB–UART adapter |
 |---|---|

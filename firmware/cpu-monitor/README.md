@@ -11,7 +11,7 @@
 
 ## Физическое подключение P0
 
-CPU без остальных модулей; HESS JP_PWR разомкнут и все peripheral drivers отключены. DevKit подключить собственным USB кабелем к ПК через USB Serial/JTAG (GPIO19 D−, GPIO20 D+). На платах с двумя USB-портами найти именно порт USB Serial/JTAG. **Не** подключать одновременно HESS +5V и PC USB VBUS без проверенной развязки.
+CPU питается **от backplane HESS +5 В** через защищённую ветвь, периферийные HESS master drivers отключены. ПК подключается к **штатному USB Serial/JTAG** (GPIO19 D−, GPIO20 D+). На подлинной DevKitC-1 v1.1 диоды D1/D7 блокируют обратную подачу к USB VBUS, но Espressif считает источники питания альтернативными: для строгой схемы HESS-only питания использовать проверенный VBUS blocker/data-only USB adapter и проверить enumeration. При обычном USB кабеле предварительно удостовериться в ревизии и измерить токи/просадки, чтобы ПК не питал backplane. [Схема и условия](../../docs/hardware/09-backplane-powered-p0.md).
 
 ## Сборка ESP-IDF
 
