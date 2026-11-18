@@ -1,3 +1,5 @@
+> **Обновление питания:** актуально [HESS +5 В → CPU 5V, USB–UART без VCC](09-backplane-powered-p0.md). Старое требование оставить +5 В HESS неподключёнными при работе с USB относится к **другой (отменённой) конфигурации**. Теперь штатный USB DevKit при внешнем питании не включать без дополнительной развязки.
+
 # CPU P0 — однозначные обозначения и соединения (исправление схем)
 
 **Ревизия 17.11.2026.** Этот документ заменяет неоднозначные стрелки прежних рисунков. Совместим с **ESP32-S3-DevKitC-1 v1.1 (J1/J3 по 22 пина)** и купленным **74HC125D SOIC-14 с переходником SOIC→DIP-14 1:1**. Расположение ножек подтверждено официальными [Espressif DevKitC-1 J1/J3](https://docs.espressif.com/projects/esp-dev-kits/en/latest/esp32s3/esp32-s3-devkitc-1/user_guide_v1.1.html) и [Nexperia 74HC125D SO14](https://assets.nexperia.com/documents/data-sheet/74HC_HCT125.pdf).
